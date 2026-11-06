@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="pt-PT" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Andreia Freitas - Pudins Artesanais | Edição Especial de Natal</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Cormorant Garamond & Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Montserrat:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            christmas: {
+              red: '#8B0000',
+              deepRed: '#5B0000',
+              ruby: '#B22222',
+              gold: '#D4AF37',
+              lightGold: '#F4E0A5',
+              pine: '#1B4332',
+              deepPine: '#0F281E',
+              cream: '#FDFBF7',
+              warmCard: '#FFFDF9',
+              caramel: '#C67D0A'
+            }
+          },
+          fontFamily: {
+            serif: ['Cormorant Garamond', 'Georgia', 'serif'],
+            sans: ['Montserrat', 'sans-serif'],
+            script: ['Great Vibes', 'cursive']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Canvas de Neve Festiva */
+    #snow-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 50;
+    }
+
+    /* Brilho Dourado Festivo */
+    .gold-glow {
+      box-shadow: 0 0 25px rgba(212, 175, 55, 0.35);
+    }
+
+    .red-gradient {
+      background: linear-gradient(135deg, #8B0000 0%, #5B0000 100%);
+    }
+
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #F4E0A5 0%, #D4AF37 50%, #B8860B 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Animação Suave de Flutuação */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+    .floating-element {
+      animation: float 4s ease-in-out infinite;
+    }
+
+    /* Efeito Shimmer para Botão */
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    .btn-shimmer {
+      background: linear-gradient(90deg, #D4AF37 0%, #FFF3C4 50%, #D4AF37 100%);
+      background-size: 200% 100%;
+      animation: shimmer 3s infinite;
+    }
+  </style>
+</head>
+<body class="bg-christmas-cream text-gray-800 font-sans antialiased selection:bg-christmas-gold selection:text-christmas-deepRed overflow-x-hidden">
+
+  <!-- Canvas da Neve de Natal -->
+  <canvas id="snow-canvas"></canvas>
+
+  <!-- Banner Superior de Natal -->
+  <div class="bg-christmas-deepPine text-christmas-lightGold text-xs md:text-sm py-2 px-4 text-center font-medium border-b border-christmas-gold/30 flex justify-center items-center gap-2">
+    <span>✨ <strong>ENCOMENDAS ABERTAS PARA O NATAL</strong> — Vagas limitadas para a Ceia de Natal !</span>
+    <a href="#sabores" class="underline hover:text-white transition-colors ml-2 hidden sm:inline">Ver Sabores</a>
+  </div>
+
+  <!-- Navegação Principal -->
+  <header class="sticky top-0 z-40 bg-christmas-cream/95 backdrop-blur-md border-b border-christmas-gold/20 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-12 h-12 rounded-full bg-christmas-red border-2 border-christmas-gold flex items-center justify-center text-christmas-gold font-serif font-bold text-xl shadow-md group-hover:scale-105 transition-transform">
+          AF
+        </div>
+        <div>
+          <span class="font-serif font-bold text-xl md:text-3xl text-christmas-red block leading-none">Andreia Freitas</span>
+          <span class="font-script text-christmas-caramel text-xl md:text-2xl block -mt-1">Pudins Artesanais</span>
+        </div>
+      </a>
+
+      <!-- Menu Desktop -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-700">
+        <a href="#sabores" class="hover:text-christmas-red transition-colors">Sabores de Natal</a>
+        <a href="#potes" class="hover:text-christmas-red transition-colors">Pudins no Pote</a>
+        <a href="#diferenciais" class="hover:text-christmas-red transition-colors">Segredo da Receita</a>
+        <a href="#como-encomendar" class="hover:text-christmas-red transition-colors">Como Encomendar</a>
+      </nav>
+
+      <!-- Botão CTA WhatsApp -->
+      <div class="flex items-center gap-3">
+        <a href="https://wa.me/5514996136971?text=Ol%C3%A1%20Andreia,%20gostaria%20de%20reservar%20um%20pudim%20para%20o%20Natal!" 
+           target="_blank" 
+           class="bg-emerald-700 hover:bg-emerald-800 text-white font-semibold px-4 py-2.5 rounded-full text-xs sm:text-sm flex items-center gap-2 shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5">
+          <i class="fa-brands fa-whatsapp text-lg"></i>
+          <span class="hidden sm:inline">Encomendar pelo WhatsApp</span>
+          <span class="sm:hidden">Encomendar</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section (Destaque do Pudim de Natal) -->
+  <section class="relative py-12 md:py-20 overflow-hidden bg-gradient-to-b from-christmas-cream via-red-950/5 to-christmas-cream">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Conteúdo do Hero -->
+        <div class="lg:col-span-6 space-y-6 text-center lg:text-left">
+          
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-christmas-red/10 border border-christmas-red/30 text-christmas-red text-xs md:text-sm font-semibold tracking-wide">
+            <i class="fa-solid fa-holly-berry text-christmas-gold"></i>
+            <span>Edição Especial de Natal 2026</span>
+          </div>
+
+          <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-christmas-red leading-tight">
+            O toque mágico e irresistível no seu Natal
+          </h1>
+
+          <p class="text-gray-700 text-base sm:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">
+            Pudins artesanais aveludados, feitos com amor, tradição e os melhores ingredientes para adoçar a sua ceia em família. Uma verdadeira obra de arte gastronómica no centro da sua mesa.
+          </p>
+
+          <!-- Badges de Destaque -->
+          <div class="pt-2 flex flex-wrap justify-center lg:justify-start gap-4 text-xs font-semibold text-christmas-pine">
+            <span class="bg-christmas-pine/10 px-3 py-1.5 rounded-md flex items-center gap-1.5">
+              <i class="fa-solid fa-check text-christmas-gold"></i> Textura 100% Aveludada
+            </span>
+            <span class="bg-christmas-pine/10 px-3 py-1.5 rounded-md flex items-center gap-1.5">
+              <i class="fa-solid fa-check text-christmas-gold"></i> Calda Artesanal Dourada
+            </span>
+            <span class="bg-christmas-pine/10 px-3 py-1.5 rounded-md flex items-center gap-1.5">
+              <i class="fa-solid fa-check text-christmas-gold"></i> Entregas na Região de Braga
+            </span>
+          </div>
+
+          <!-- Botões CTA Hero -->
+          <div class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+            <a href="https://wa.me/5514996136971?text=Ol%C3%A1%20Andreia,%20gostaria%20de%20reservar%20o%20Pudim%20Especial%20de%20Natal!" 
+               target="_blank" 
+               class="w-full sm:w-auto bg-christmas-red hover:bg-christmas-ruby text-white font-bold px-8 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all transform hover:-translate-y-1 flex items-center justify-center gap-3 text-base group">
+              <i class="fa-brands fa-whatsapp text-xl text-emerald-400"></i>
+              <span>Reservar Meu Pudim de Natal</span>
+              <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+            </a>
+
+            <a href="#sabores" 
+               class="w-full sm:w-auto bg-white border-2 border-christmas-gold/60 text-christmas-red hover:bg-christmas-lightGold/20 font-semibold px-6 py-4 rounded-full transition-all text-center text-sm">
+              Ver Cardápio Completo
+            </a>
+          </div>
+
+          <p class="text-xs text-gray-500 italic pt-2">
+            ⚠️ Reserve com antecedência. As vagas de produção para os dias 23 e 24 de Dezembro são limitadas!
+          </p>
+        </div>
+
+        <!-- Fotografia Hero (Imagem de Natal com Frutas Cristalizadas) -->
+        <div class="lg:col-span-6 relative">
+          <!-- Moldura e Brilho -->
+          <div class="relative mx-auto max-w-md lg:max-w-none">
+            <div class="absolute -inset-2 rounded-3xl bg-gradient-to-r from-christmas-gold via-christmas-red to-christmas-pine opacity-40 blur-xl"></div>
+            
+            <div class="relative bg-white p-3 sm:p-4 rounded-3xl shadow-2xl border-2 border-christmas-gold/40">
+              <div class="relative overflow-hidden rounded-2xl aspect-square sm:aspect-4/3 lg:aspect-square">
+                <!-- Imagem Principal Hero -->
+                <img src="pudim_panetone.jpeg" 
+                     onerror="this.src='https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?q=80&w=1000&auto=format&fit=crop'"
+                     alt="Pudim Panetone de Natal com Frutas Cristalizadas - Andreia Freitas" 
+                     class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700">
+                
+                <!-- Tag sobreposta na Imagem -->
+                <div class="absolute top-4 left-4 bg-christmas-red/90 backdrop-blur-md text-white px-3 py-1.5 rounded-full text-xs font-bold border border-christmas-gold flex items-center gap-1.5 shadow-lg">
+                  <i class="fa-solid fa-crown text-christmas-gold"></i>
+                  <span>Estrela da Ceia de Natal</span>
+                </div>
+              </div>
+
+              <!-- Card Flutuante de Avaliação -->
+              <div class="absolute -bottom-6 -left-4 sm:left-6 bg-white p-3 sm:p-4 rounded-2xl shadow-xl border border-christmas-gold/30 flex items-center gap-3 floating-element max-w-[240px] sm:max-w-xs">
+                <div class="w-10 h-10 rounded-full bg-christmas-lightGold flex items-center justify-center text-christmas-red font-bold text-lg shrink-0">
+                  <i class="fa-solid fa-star text-christmas-gold"></i>
+                </div>
+                <div>
+                  <p class="text-xs font-bold text-gray-900">Sucesso Absoluto</p>
+                  <p class="text-[11px] text-gray-600 leading-tight">"O pudim mais cremoso que já provámos na nossa Ceia de Natal !!"</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção de Sabores / Cardápio Especial de Natal -->
+  <section id="sabores" class="py-16 md:py-24 bg-white relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Cabeçalho da Seção -->
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+        <span class="font-script text-christmas-caramel text-2xl md:text-5xl block">Irresistíveis & Festivos</span>
+        <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-christmas-red">
+          Cardápio Especial de Natal
+        </h2>
+        <div class="w-24 h-1 bg-christmas-gold mx-auto rounded-full"></div>
+        <p class="text-gray-600 text-sm sm:text-base pt-2">
+          Cada pudim é desenformado com extremo cuidado para garantir uma apresentação deslumbrante e um sabor inesquecível na sua mesa festiva.
+        </p>
+      </div>
+
+      <!-- Grid de Pudins Grandes / Família -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <!-- Card 1: Pudim Panetone com Frutas Cristalizadas (HERO REPEAT) -->
+        <div class="bg-christmas-warmCard rounded-2xl overflow-hidden border border-christmas-gold/30 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 group flex flex-col justify-between">
+          <div>
+            <div class="relative overflow-hidden aspect-4/3">
+              <img src="pudim_panetone.jpeg" 
+                   onerror="this.src='https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?q=80&w=800&auto=format&fit=crop'"
+                   alt="Pudim Especial de Frutas Cristalizadas" 
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <span class="absolute top-3 right-3 bg-christmas-red text-white text-xs font-bold px-3 py-1 rounded-full border border-christmas-gold">
+                Edição Limitada
+              </span>
+            </div>
+            <div class="p-6 space-y-3">
+              <h3 class="font-serif text-2xl font-bold text-christmas-red group-hover:text-christmas-ruby transition-colors">
+                Pudim Especial Panetone e Frutas Cristalizadas
+              </h3>
+              <p class="text-xs text-gray-600 leading-relaxed">
+                Massa ultra aveludada enriquecida com delicadas frutas cristalizadas selecionadas, coberto com calda de caramelo dourado perfumado e frutas cristalizadas.
+              </p>
+              <div class="flex items-center gap-2 text-xs text-christmas-caramel font-semibold">
+                <i class="fa-solid fa-gift"></i> Ideal para 8 a 10 pessoas (Tamanho Família)
+              </div>
+            </div>
+          </div>
+          <div class="p-6 pt-0">
+            <a href="https://wa.me/551496136971?text=Ol%C3%A1%20Andreia,%20gostaria%20de%20encomendar%20o%20Pudim%20Especial%20de%20Frutas%20Cristalizadas!" 
+               target="_blank" 
+               class="w-full bg-christmas-red hover:bg-christmas-ruby text-white font-semibold py-3 rounded-xl transition-colors text-center block text-sm shadow-md">
+              <i class="fa-brands fa-whatsapp mr-2"></i>Encomendar para o Natal
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 2: Pudim Chocolate Branco com Calda Vermelha -->
+        <div class="bg-christmas-warmCard rounded-2xl overflow-hidden border border-christmas-gold/30 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 group flex flex-col justify-between">
+          <div>
+            <div class="relative overflow-hidden aspect-4/3">
+              <img src="pudim_choc_branc_verm.jpeg" 
+                   onerror="this.src='https://images.unsplash.com/photo-1587314168485-3236d6710814?q=80&w=800&auto=format&fit=crop'"
+                   alt="Pudim de Chocolate Branco com Frutas Vermelhas" 
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <span class="absolute top-3 right-3 bg-purple-900 text-white text-xs font-bold px-3 py-1 rounded-full border border-christmas-gold">
+                Favorito da Casa
+              </span>
+            </div>
+            <div class="p-6 space-y-3">
+              <h3 class="font-serif text-2xl font-bold text-christmas-red group-hover:text-christmas-ruby transition-colors">
+                Pudim Chocolate Branco com Frutas Vermelhas
+              </h3>
+              <p class="text-xs text-gray-600 leading-relaxed">
+                A cremosidade clássica com o sabor do chocolate branco combinada com o contraste levemente ácido e artesanal da compota de frutas vermelhas.
+              </p>
+              <div class="flex items-center gap-2 text-xs text-christmas-caramel font-semibold">
+                <i class="fa-solid fa-gift"></i> Servido em momentos especiais de Natal.
+              </div>
+            </div>
+          </div>
+          <div class="p-6 pt-0">
+            <a href="https://wa.me/5514996136971?text=Ol%C3%A1%20Andreia,%20gostaria%20de%20encomendar%20o%20Pudim%20Chocolate%20Branco%20com%20Frutas%20Vermelhas!" 
+               target="_blank" 
+               class="w-full bg-christmas-red hover:bg-christmas-ruby text-white font-semibold py-3 rounded-xl transition-colors text-center block text-sm shadow-md">
+              <i class="fa-brands fa-whatsapp mr-2"></i>Encomendar para o Natal
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 3: Pudim Tradicional de Leite Condensado Perfeito -->
+        <div class="bg-christmas-warmCard rounded-2xl overflow-hidden border border-christmas-gold/30 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 group flex flex-col justify-between">
+          <div>
+            <div class="relative overflow-hidden aspect-4/3">
+              <img src="pudim_tradicional.jpeg" 
+                   onerror="this.src='https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?q=80&w=800&auto=format&fit=crop'"
+                   alt="Pudim Tradicional Aveludado" 
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <span class="absolute top-3 right-3 bg-christmas-pine text-white text-xs font-bold px-3 py-1 rounded-full border border-christmas-gold">
+                Clássico Insuperável
+              </span>
+            </div>
+            <div class="p-6 space-y-3">
+              <h3 class="font-serif text-2xl font-bold text-christmas-red group-hover:text-christmas-ruby transition-colors">
+                Pudim Tradicional de Leite
+              </h3>
+              <p class="text-xs text-gray-600 leading-relaxed">
+                O autêntico pudim lisinho e aveludado, com abundante calda de caramelo brilhante. A receita secreta que conquista todas as gerações.
+              </p>
+              <div class="flex items-center gap-2 text-xs text-christmas-caramel font-semibold">
+                <i class="fa-solid fa-gift"></i> Disponível em Tamanho M e Família
+              </div>
+            </div>
+          </div>
+          <div class="p-6 pt-0">
+            <a href="https://wa.me/5514996136971?text=Ol%C3%A1%20Andreia,%20gostaria%20de%20encomendar%20o%20Pudim%20Tradicional!" 
+               target="_blank" 
+               class="w-full bg-christmas-red hover:bg-christmas-ruby text-white font-semibold py-3 rounded-xl transition-colors text-center block text-sm shadow-md">
+              <i class="fa-brands fa-whatsapp mr-2"></i>Encomendar para o Natal
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 4: Pudim Cremoso com Calda Suave de Goiabada -->
+        <div class="bg-christmas-warmCard rounded-2xl overflow-hidden border border-christmas-gold/30 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 group flex flex-col justify-between">
+          <div>
+            <div class="relative overflow-hidden aspect-4/3">
+              <img src="pudim_romeu_julieta.jpeg" 
+                   onerror="this.src='https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?q=80&w=800&auto=format&fit=crop'"
+                   alt="Pudim de Queijo e Goiabada / Romeu e Julieta" 
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <div class="p-6 space-y-3">
+              <h3 class="font-serif text-2xl font-bold text-christmas-red group-hover:text-christmas-ruby transition-colors">
+                Pudim Romeu & Julieta
+              </h3>
+              <p class="text-xs text-gray-600 leading-relaxed">
+                A combinação perfeita entre a suavidade do pudim e a generosa calda artesanal derretida com delicados corações doces.
+              </p>
+              <div class="flex items-center gap-2 text-xs text-christmas-caramel font-semibold">
+                <i class="fa-solid fa-heart text-red-500"></i> Toque romântico e afetivo na ceia
+              </div>
+            </div>
+          </div>
+          <div class="p-6 pt-0">
+            <a href="https://wa.me/5514996136971?text=Ol%C3%A1%20Andreia,%20gostaria%20de%20encomendar%20o%20Pudim%20Romeu%20e%20Julieta!" 
+               target="_blank" 
+               class="w-full bg-christmas-red hover:bg-christmas-ruby text-white font-semibold py-3 rounded-xl transition-colors text-center block text-sm shadow-md">
+              <i class="fa-brands fa-whatsapp mr-2"></i>Encomendar para o Natal
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 5: Pudim de Chocolate Nobre -->
+        <div class="bg-christmas-warmCard rounded-2xl overflow-hidden border border-christmas-gold/30 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 group flex flex-col justify-between">
+          <div>
+            <div class="relative overflow-hidden aspect-4/3">
+              <img src="./WhatsApp Image 2026-11-06 at 11.14.20 (3).jpeg" 
+                   onerror="this.src='https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?q=80&w=800&auto=format&fit=crop'"
+                   alt="Pudim de Chocolate Nobre / Cacau Oitavado" 
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <div class="p-6 space-y-3">
+              <h3 class="font-serif text-2xl font-bold text-christmas-red group-hover:text-christmas-ruby transition-colors">
+                Pudim de Chocolate Nobre
+              </h3>
+              <p class="text-xs text-gray-600 leading-relaxed">
+                Para os amantes do chocolate intenso: textura incrivelmente sedosa preparada com cacau selecionado e formato oitavado exclusivo.
+              </p>
+              <div class="flex items-center gap-2 text-xs text-christmas-caramel font-semibold">
+                <i class="fa-solid fa-star"></i> Sabor marcante e inesquecível
+              </div>
+            </div>
+          </div>
+          <div class="p-6 pt-0">
+            <a href="https://wa.me/5514996136971?text=Ol%C3%A1%20Andreia,%20gostaria%20de%20encomendar%20o%20Pudim%20de%20Chocolate!" 
+               target="_blank" 
+               class="w-full bg-christmas-red hover:bg-christmas-ruby text-white font-semibold py-3 rounded-xl transition-colors text-center block text-sm shadow-md">
+              <i class="fa-brands fa-whatsapp mr-2"></i>Encomendar para o Natal
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 6: Individual Servido no Prato -->
+        <div class="bg-christmas-warmCard rounded-2xl overflow-hidden border border-christmas-gold/30 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 group flex flex-col justify-between">
+          <div>
+            <div class="relative overflow-hidden aspect-4/3">
+              <img src="pudim_individual.jpeg" 
+                   onerror="this.src='https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?q=80&w=800&auto=format&fit=crop'"
+                   alt="Pudim Individual com Clima de Natal" 
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <div class="p-6 space-y-3">
+              <h3 class="font-serif text-2xl font-bold text-christmas-red group-hover:text-christmas-ruby transition-colors">
+                Pudim Individual de Natal
+              </h3>
+              <p class="text-xs text-gray-600 leading-relaxed">
+                Porção individual desenformada no momento certo, perfeita para sobremesas personalizadas ou pequenas celebrações.
+              </p>
+              <div class="flex items-center gap-2 text-xs text-christmas-caramel font-semibold">
+                <i class="fa-solid fa-cookie-bite"></i> Tamanho perfeito individual
+              </div>
+            </div>
+          </div>
+          <div class="p-6 pt-0">
+            <a href="https://wa.me/5514996136971?text=Ol%C3%A1%20Andreia,%20gostaria%20de%20encomendar%20Pudins%20Individuais!" 
+               target="_blank" 
+               class="w-full bg-christmas-red hover:bg-christmas-ruby text-white font-semibold py-3 rounded-xl transition-colors text-center block text-sm shadow-md">
+              <i class="fa-brands fa-whatsapp mr-2"></i>Encomendar para o Natal
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção Especial: Pudins no Pote para Presentear -->
+  <section id="potes" class="py-16 md:py-20 bg-christmas-pine text-white relative overflow-hidden">
+    <!-- Elementos decorativos de fundo -->
+    <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-christmas-gold/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -left-20 -top-20 w-80 h-80 bg-christmas-red/20 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Imagem do Pote com Laço Rústico (Imagem 2) -->
+        <div class="lg:col-span-6 order-2 lg:order-1">
+          <div class="grid grid-cols-2 gap-4">
+            <div class="rounded-2xl overflow-hidden border-2 border-christmas-gold/40 shadow-xl">
+              <img src="./WhatsApp Image 2026-11-06 at 11.14.20 (2).jpeg" 
+                   onerror="this.src='https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?q=80&w=800&auto=format&fit=crop'"
+                   alt="Pudins no Pote com Laço Rústico e Coração" 
+                   class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+            </div>
+            <div class="space-y-4">
+              <div class="rounded-2xl overflow-hidden border-2 border-christmas-gold/40 shadow-xl aspect-square">
+                <img src="./WhatsApp Image 2026-11-06 at 11.14.20 (9).jpeg" 
+                     onerror="this.src='https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?q=80&w=800&auto=format&fit=crop'"
+                     alt="Mini Pudim no Pote Espelhado" 
+                     class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+              </div>
+              <div class="rounded-2xl overflow-hidden border-2 border-christmas-gold/40 shadow-xl aspect-square">
+                <img src="./WhatsApp Image 2026-11-06 at 11.14.20 (4).jpeg" 
+                     onerror="this.src='https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?q=80&w=800&auto=format&fit=crop'"
+                     alt="Mini Pudim Servido no Prato" 
+                     class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Conteúdo dos Potes -->
+        <div class="lg:col-span-6 space-y-6 order-1 lg:order-2">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-christmas-gold/20 text-christmas-lightGold text-xs font-semibold">
+            <i class="fa-solid fa-gift"></i> Mimos & Lembranças de Natal
+          </div>
+
+          <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-christmas-lightGold">
+            Pudins em Potes Elegantes: O Presente Perfeito
+          </h2>
+
+          <p class="text-gray-200 text-sm sm:text-base leading-relaxed">
+            Surpreenda amigos, familiares, professores ou colaboradores com uma lembrança doce e cheia de afeto. Nossos potes de vidro vêm decorados com fio de corda rústica, tag em formato de coração e o mesmo sabor extraordinário.
+          </p>
+
+          <ul class="space-y-3 text-sm text-christmas-lightGold">
+            <li class="flex items-center gap-3">
+              <div class="w-6 h-6 rounded-full bg-christmas-gold/20 flex items-center justify-center text-christmas-gold text-xs">✓</div>
+              <span>Apresentação impecável pronta para oferecer</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <div class="w-6 h-6 rounded-full bg-christmas-gold/20 flex items-center justify-center text-christmas-gold text-xs">✓</div>
+              <span>Perfeito para cabazes festivos e lembranças de empresa</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <div class="w-6 h-6 rounded-full bg-christmas-gold/20 flex items-center justify-center text-christmas-gold text-xs">✓</div>
+              <span>Descontos especiais para encomendas em quantidade</span>
+            </li>
+          </ul>
+
+          <div class="pt-4">
+            <a href="https://wa.me/5514996136971?text=Ol%C3%A1%20Andreia,%20gostaria%20de%20saber%20mais%20sobre%20os%20Pudins%20no%20Pote%20para%20Presente!" 
+               target="_blank" 
+               class="bg-christmas-gold hover:bg-yellow-500 text-christmas-deepPine font-bold px-8 py-4 rounded-full shadow-lg transition-all inline-flex items-center gap-3 text-sm">
+              <i class="fa-brands fa-whatsapp text-lg"></i>
+              <span>Encomendar Potes de Presente</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Diferenciais / Por que escolher os Pudins da Andreia Freitas -->
+  <section id="diferenciais" class="py-16 md:py-24 bg-christmas-cream relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+        <span class="font-script text-christmas-caramel text-2xl block">Segredo da Perfeição</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-christmas-red">
+          Por que os nossos pudins são inesquecíveis?
+        </h2>
+        <div class="w-20 h-1 bg-christmas-gold mx-auto rounded-full"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        
+        <div class="bg-white p-8 rounded-2xl border border-christmas-gold/20 shadow-sm text-center space-y-4 hover:shadow-md transition-shadow">
+          <div class="w-16 h-16 rounded-full bg-christmas-red/10 text-christmas-red flex items-center justify-center text-2xl mx-auto">
+            <i class="fa-solid fa-spoon"></i>
+          </div>
+          <h3 class="font-serif text-xl font-bold text-gray-900">Textura Aveludada</h3>
+          <p class="text-xs text-gray-600 leading-relaxed">
+            Preparados em banho-maria lento para atingir aquela textura ultracremosa que derrete suavemente na boca.
+          </p>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl border border-christmas-gold/20 shadow-sm text-center space-y-4 hover:shadow-md transition-shadow">
+          <div class="w-16 h-16 rounded-full bg-christmas-gold/20 text-christmas-caramel flex items-center justify-center text-2xl mx-auto">
+            <i class="fa-solid fa-droplet"></i>
+          </div>
+          <h3 class="font-serif text-xl font-bold text-gray-900">Calda Dourada Secreta</h3>
+          <p class="text-xs text-gray-600 leading-relaxed">
+            Caramelo feito no ponto exato: nem demasiado doce, nem amargo, no tom âmbar perfeito.
+          </p>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl border border-christmas-gold/20 shadow-sm text-center space-y-4 hover:shadow-md transition-shadow">
+          <div class="w-16 h-16 rounded-full bg-christmas-pine/10 text-christmas-pine flex items-center justify-center text-2xl mx-auto">
+            <i class="fa-solid fa-leaf"></i>
+          </div>
+          <h3 class="font-serif text-xl font-bold text-gray-900">Ingredientes Selecionados</h3>
+          <p class="text-xs text-gray-600 leading-relaxed">
+            Ovos frescos, leite de alta qualidade e amor em cada etapa. Sem misturas pré-prontas ou conservantes.
+          </p>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl border border-christmas-gold/20 shadow-sm text-center space-y-4 hover:shadow-md transition-shadow">
+          <div class="w-16 h-16 rounded-full bg-christmas-red/10 text-christmas-red flex items-center justify-center text-2xl mx-auto">
+            <i class="fa-solid fa-ribbon"></i>
+          </div>
+          <h3 class="font-serif text-xl font-bold text-gray-900">Embalagem Festiva</h3>
+          <p class="text-xs text-gray-600 leading-relaxed">
+            Prontos para irem direto para a sua mesa de Natal ou para serem entregues como uma lembrança inesquecível.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Passo a Passo de Encomenda -->
+  <section id="como-encomendar" class="py-16 bg-white border-t border-christmas-gold/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-12 space-y-2">
+        <h2 class="font-serif text-3xl font-bold text-christmas-red">Como fazer a sua encomenda?</h2>
+        <p class="text-xs text-gray-600">Simples, rápido e garante a sua sobremesa sem preocupações na Ceia.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <div class="flex flex-col items-center text-center p-6 bg-christmas-warmCard rounded-xl border border-christmas-gold/20">
+          <div class="w-12 h-12 rounded-full bg-christmas-red text-christmas-gold font-bold text-xl flex items-center justify-center mb-4">1</div>
+          <h4 class="font-serif text-lg font-bold text-gray-900 mb-2">Escolha o Sabor</h4>
+          <p class="text-xs text-gray-600">Navegue pelo nosso cardápio e escolha o pudim que mais combina com a sua família.</p>
+        </div>
+
+        <div class="flex flex-col items-center text-center p-6 bg-christmas-warmCard rounded-xl border border-christmas-gold/20">
+          <div class="w-12 h-12 rounded-full bg-christmas-red text-christmas-gold font-bold text-xl flex items-center justify-center mb-4">2</div>
+          <h4 class="font-serif text-lg font-bold text-gray-900 mb-2">Envie mensagem no WhatsApp</h4>
+          <p class="text-xs text-gray-600">Clique num dos botões para falar diretamente com a Andreia e indicar o tamanho pretendido.</p>
+        </div>
+
+        <div class="flex flex-col items-center text-center p-6 bg-christmas-warmCard rounded-xl border border-christmas-gold/20">
+          <div class="w-12 h-12 rounded-full bg-christmas-red text-christmas-gold font-bold text-xl flex items-center justify-center mb-4">3</div>
+          <h4 class="font-serif text-lg font-bold text-gray-900 mb-2">Agende o Levantamento</h4>
+          <p class="text-xs text-gray-600">Combine o dia e hora para recolher o seu pudim bem fresquinho para o Natal.</p>
+        </div>
+
+      </div>
+
+      <div class="mt-12 text-center">
+        <a href="https://wa.me/5514996136971?text=Ol%C3%A1%20Andreia,%20quero%20agendar%20o%20meu%20pudim%20de%20Natal!" 
+           target="_blank" 
+           class="inline-flex items-center gap-3 bg-emerald-700 hover:bg-emerald-800 text-white font-bold px-8 py-4 rounded-full shadow-xl text-sm transition-all hover:scale-105">
+          <i class="fa-brands fa-whatsapp text-xl"></i>
+          <span>Agendar Minha Encomenda Agora</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Depoimentos / Carinho dos Clientes -->
+  <section class="py-16 bg-christmas-cream">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
+      
+      <span class="font-script text-christmas-caramel text-4xl block">O que dizem as nossas famílias</span>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white p-6 rounded-2xl border border-christmas-gold/30 shadow-sm text-left italic text-xs text-gray-700 space-y-3">
+          <p>"O pudim com calda de amoras foi a sensação da nossa Ceia no ano passado! Textura perfeita e nada enjoativo. Já reservámos o deste ano!"</p>
+          <p class="font-bold font-sans text-christmas-red not-italic text-right">— Maria João, Braga</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-christmas-gold/30 shadow-sm text-left italic text-xs text-gray-700 space-y-3">
+          <p>"Encomendei os pudins no pote para oferecer às professoras dos meus filhos no Natal e todos adoraram. A apresentação com o laço rústico é linda!"</p>
+          <p class="font-bold font-sans text-christmas-red not-italic text-right">— Sofia Antunes, Braga</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Rodapé Festivo -->
+  <footer class="bg-christmas-deepRed text-white border-t-2 border-christmas-gold">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center md:text-left">
+        
+        <!-- Branding Rodapé -->
+        <div class="space-y-2">
+          <span class="font-serif font-bold text-3xl text-christmas-lightGold block">Andreia Freitas</span>
+          <span class="font-script text-christmas-gold text-2xl block">Pudins Artesanais</span>
+          <p class="text-xs text-gray-300">Adoçando momentos especiais com afeto e tradição.</p>
+        </div>
+
+        <!-- Contactos & Localização -->
+        <div class="space-y-2 text-sm text-gray-300">
+          <p class="font-bold text-white text-base">Contactos & Localização</p>
+          <p><i class="fa-solid fa-location-dot text-christmas-gold mr-2"></i>Londrina, Brasil</p>
+          <p><i class="fa-brands fa-instagram text-christmas-gold mr-2"></i>@andreia.freitas.pudim</p>
+          <p><i class="fa-brands fa-whatsapp text-christmas-gold mr-2"></i>+55 (14) 99613-6971</p>
+        </div>
+
+        <!-- Mensagem de Boas Festas -->
+        <div class="bg-christmas-deepPine p-6 rounded-2xl border border-christmas-gold/30 text-center space-y-2">
+          <i class="fa-solid fa-snowflake text-christmas-gold text-2xl"></i>
+          <p class="font-serif font-bold text-christmas-lightGold text-xl">Boas Festas!</p>
+          <p class="text-[14px] text-gray-300 italic">"Desejamos um Feliz e Doce Natal a todos os nossos clientes e amigos!"</p>
+        </div>
+
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-christmas-gold/20 text-center text-[11px] text-gray-400">
+        <p>© 2026 Andreia Freitas - Pudins Artesanais. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script da Neve Animada -->
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const canvas = document.getElementById('snow-canvas');
+      const ctx = canvas.getContext('2d');
+
+      let width = canvas.width = window.innerWidth;
+      let height = canvas.height = window.innerHeight;
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+
+      const numFlakes = Math.min(width / 15, 60); // Ajusta quantidade de acordo com a tela
+      const flakes = [];
+
+      for (let i = 0; i < numFlakes; i++) {
+        flakes.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          r: Math.random() * 3 + 1,
+          d: Math.random() * numFlakes,
+          opacity: Math.random() * 0.6 + 0.2
+        });
+      }
+
+      function drawSnow() {
+        ctx.clearRect(0, 0, width, height);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+        ctx.beginPath();
+        
+        for (let i = 0; i < numFlakes; i++) {
+          const f = flakes[i];
+          ctx.moveTo(f.x, f.y);
+          ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2, true);
+        }
+        ctx.fill();
+        updateSnow();
+      }
+
+      let angle = 0;
+      function updateSnow() {
+        angle += 0.01;
+        for (let i = 0; i < numFlakes; i++) {
+          const f = flakes[i];
+          f.y += Math.cos(angle + f.d) + 1 + f.r / 2;
+          f.x += Math.sin(angle) * 1;
+
+          if (f.x > width + 5 || f.x < -5 || f.y > height) {
+            if (i % 3 > 0) {
+              flakes[i] = { x: Math.random() * width, y: -10, r: f.r, d: f.d, opacity: f.opacity };
+            } else {
+              if (Math.sin(angle) > 0) {
+                flakes[i] = { x: -5, y: Math.random() * height, r: f.r, d: f.d, opacity: f.opacity };
+              } else {
+                flakes[i] = { x: width + 5, y: Math.random() * height, r: f.r, d: f.d, opacity: f.opacity };
+              }
+            }
+          }
+        }
+      }
+
+      function animate() {
+        drawSnow();
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+    });
+  </script>
+</body>
+</html>
